@@ -1,6 +1,6 @@
 food_homepage:
-    path:     /h
-    defaults: { _controller: FoodBundle:Default:index }
+    path:     /
+    defaults: { _controller: FoodBundle:Default:bestand } 
     
 food_login:
     path:     /login
