@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="FoodBundle\Entity\FoodMeta" table="food_meta">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="foodRef" type="integer" column="food_ref" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="purchaseDate" type="date" column="purchase_date" nullable="false"/>
+    <field name="expireDate" type="date" column="expire_date" nullable="false"/>
+    <field name="amount" type="integer" column="amount" nullable="false">
+        
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="abgang" type="integer" column="abgang" nullable="false"></field>
+    <field name="price" type="float" column="price" precision="10" scale="0" nullable="false"/>
+            <many-to-one
+            field="foodMain"
+            target-entity="Food"
+            inversed-by="foodData"
+            join-column="foodName">
+
+            <join-column name="food_ref" referenced-column-name="id" />
+        </many-to-one>
+  </entity>
+</doctrine-mapping>

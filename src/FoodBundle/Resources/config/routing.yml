@@ -1,0 +1,32 @@
+food_homepage:
+    path:     /h
+    defaults: { _controller: FoodBundle:Default:index }
+    
+food_login:
+    path:     /login
+    defaults: { _controller: FoodBundle:Security:login }
+  
+food_bestand:
+    path:     /bestand
+    defaults: { _controller: FoodBundle:Default:bestand } 
+
+food_jsonbestand:
+    path:     /jsonbestand
+    defaults: { _controller: FoodBundle:Default:jsonbestand }
+    
+food_jsonbestand:
+    path:     /jsonbestand
+    defaults: { _controller: FoodBundle:Default:jsonbestand }
+    
+food_new:
+    path:     /bestand/neu
+    defaults: { _controller: FoodBundle:Default:neu }
+    
+
+food_neuesEssen:
+    path:     /bestand/neues-lebensmittel
+    defaults: { _controller: FoodBundle:Default:neuesEssen }
+    
+food_abgang:
+    path:     /bestand/{id}
+    defaults: { _controller: FoodBundle:Default:abgang }    

@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="col-lg-12">
+            <h1 class="page-header">Bestand</h1>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Bestandsliste
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="dataTable_wrapper">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Gekauft</th>
+                                            <th>Ablaufdatum</th>
+                                            <th>Menge</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                                </div>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+        </div>
+
+    </div> 
+</div>
+                <script>
+                    $(document).ready(function() {
+                        $('#dataTables-example').DataTable({
+                                 "sAjaxSource": "/jsonbestand",
+                                 "aoColumnDefs": [            
+                                    {
+                                      "aTargets": [ 0 ], // Column to target
+                                      "mRender": function ( data, type, full ) {
+                                        // 'full' is the row's data object, and 'data' is this column's data
+                                        // e.g. 'full[0]' is the comic id, and 'data' is the comic title
+                                        return '<a href="/bestand/' + full[4] + '">' + data + '</a>';
+                                }
+                              }
+                            ]
+                         });
+                         });
+                </script>
+{% endblock %}
