@@ -3,8 +3,8 @@ parameters:
     database_host: localhost
     database_port: null
     database_name: teambonus_mysql
-    database_user: root
-    database_password: sunnycuba
+    database_user: mysql_teambonus
+    database_password: 5Gh4%milo1H
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null
