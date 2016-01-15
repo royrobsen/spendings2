@@ -46,7 +46,7 @@ class DefaultController extends Controller
                     ->getQuery();
 
             $foodMeta2 = $queryFoodMeta->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
-            dump($foodMeta2);
+
               
             $foodBestand = $queryFoodBestand->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
 
