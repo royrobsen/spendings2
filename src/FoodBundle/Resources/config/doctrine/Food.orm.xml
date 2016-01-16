@@ -10,5 +10,9 @@
             field="foodData"
             target-entity="FoodMeta"
             mapped-by="foodMain" />
+            <one-to-many
+            field="shoplist"
+            target-entity="Shoppinglist"
+            mapped-by="foodMain" />
   </entity>
 </doctrine-mapping>

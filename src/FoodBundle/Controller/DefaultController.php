@@ -8,8 +8,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 use FoodBundle\Entity\Food;
 use FoodBundle\Entity\FoodMeta;
+use FoodBundle\Entity\Shoppinglist;
 
 use FoodBundle\Form\Type\FoodMetaType;
+use FoodBundle\Form\Type\ShoppinglistType;
+
 
 class DefaultController extends Controller
 {
@@ -131,4 +134,48 @@ class DefaultController extends Controller
         return $this->render('FoodBundle:Default:abgang.html.twig', array('foods' => $food));
     }
     
+    public function shoppinglistAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $shoppinglist = new Shoppinglist();
+        
+        $query = $em->createQuery( "SELECT f, s FROM FoodBundle:Shoppinglist s JOIN s.foodMain f");
+        
+        $shoppinglist = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+                
+        return $this->render('FoodBundle:Default:shoppinglist.html.twig', array('shoppinglist' => $shoppinglist));
+    }
+    
+    public function addlistAction(Request $request)
+    {
+        
+        $shoppinglist = new Shoppinglist();
+        
+        $form = $this->createForm(new ShoppinglistType(), $shoppinglist); 
+        $form->handleRequest($request);
+                
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();       
+                $em->persist($shoppinglist);
+                $em->flush();
+                $this->get('session')->getFlashBag()->add('notice', 'Erfolgreich gespeichert!');
+            }
+        
+        return $this->render('FoodBundle:Default:addlist.html.twig', array('form' => $form->createView()));
+    }
+    
+    public function deletelistAction($id, Request $request)
+    {
+     
+        $shoppinglist = new Shoppinglist();
+        
+        $em = $this->getDoctrine()->getManager();   
+        $shoppinglist = $em->getRepository('FoodBundle:Shoppinglist')->findOneBy(array('id' => $id));
+      
+        $em->remove($shoppinglist);
+        $em->flush();
+        
+        return $this->redirectToRoute('shoppinglist');
+    }
 }
