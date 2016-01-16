@@ -30,3 +30,16 @@ food_neuesEssen:
 food_abgang:
     path:     /bestand/{id}
     defaults: { _controller: FoodBundle:Default:abgang }    
+    
+shoppinglist:
+    path:     /shoppinglist
+    defaults: { _controller: FoodBundle:Default:shoppinglist }    
+    
+shoppinglist_add:
+    path:     /shoppinglist/add
+    defaults: { _controller: FoodBundle:Default:addlist }  
+    
+shoppinglist_delete:
+    path:     /shoppinglist/delete/{id}
+    defaults: { _controller: FoodBundle:Default:deletelist }  
+   

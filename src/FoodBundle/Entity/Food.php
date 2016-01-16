@@ -97,4 +97,43 @@ class Food
     {
         return $this->foodData;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $shoplist;
+
+
+    /**
+     * Add shoplist
+     *
+     * @param \FoodBundle\Entity\Shoppinglist $shoplist
+     *
+     * @return Food
+     */
+    public function addShoplist(\FoodBundle\Entity\Shoppinglist $shoplist)
+    {
+        $this->shoplist[] = $shoplist;
+
+        return $this;
+    }
+
+    /**
+     * Remove shoplist
+     *
+     * @param \FoodBundle\Entity\Shoppinglist $shoplist
+     */
+    public function removeShoplist(\FoodBundle\Entity\Shoppinglist $shoplist)
+    {
+        $this->shoplist->removeElement($shoplist);
+    }
+
+    /**
+     * Get shoplist
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getShoplist()
+    {
+        return $this->shoplist;
+    }
 }
