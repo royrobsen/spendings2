@@ -42,4 +42,8 @@ shoppinglist_add:
 shoppinglist_delete:
     path:     /shoppinglist/delete/{id}
     defaults: { _controller: FoodBundle:Default:deletelist }  
+    
+barcode:
+    path:     /barcode
+    defaults: { _controller: FoodBundle:Barcode:barcode }  
    
