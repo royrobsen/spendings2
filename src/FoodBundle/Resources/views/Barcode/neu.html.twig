@@ -1,0 +1,26 @@
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+<div class="col-lg-12">
+    <div class="col-lg-12">
+        {% for flash_message in app.session.flashbag.get('notice') %}
+        <div class="alert alert-info">
+            {{ flash_message }}
+        </div>
+        {% endfor %}
+        {{form_start(form)}}
+           <h4>Artikel</h4>
+           {{ form_widget(form.artikel, { 'attr': {'class': 'form-control'}} ) }}
+            <h4>Menge</h4>
+           {{ form_widget(form.amount, { 'attr': {'class': 'form-control'}} ) }}
+           <h4>Preis</h4>
+           {{ form_widget(form.price, { 'attr': {'class': 'form-control'}} ) }}
+           <h4>Gekauft am</h4>
+           {{ form_widget(form.purchaseDate) }}
+           <h4>Haltbar bis</h4>
+           {{ form_widget(form.expireDate) }}<br />
+           {{ form_widget(form.save, { 'attr': {'class': 'btn btn-info'}} ) }}
+        {{form_end(form)}}     
+    </div>
+</div> 
+{% endblock %}

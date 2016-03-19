@@ -19,11 +19,19 @@
     </field>
     <field name="abgang" type="integer" column="abgang" nullable="false"></field>
     <field name="price" type="float" column="price" precision="10" scale="0" nullable="false"/>
-            <many-to-one
+        <many-to-one
             field="foodMain"
             target-entity="Food"
             inversed-by="foodData"
             join-column="foodName">
+
+            <join-column name="food_ref" referenced-column-name="id" />
+        </many-to-one>
+        <many-to-one
+            field="artikel"
+            target-entity="Artikel"
+            inversed-by="artikelMeta"
+            join-column="artikelName">
 
             <join-column name="food_ref" referenced-column-name="id" />
         </many-to-one>

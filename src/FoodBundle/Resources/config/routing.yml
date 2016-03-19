@@ -46,4 +46,12 @@ shoppinglist_delete:
 barcode:
     path:     /barcode
     defaults: { _controller: FoodBundle:Barcode:barcode }  
+    
+barcode_neuerartikel:
+    path:     /neuer-artikel
+    defaults: { _controller: FoodBundle:Barcode:neuerArtikel }
+    
+barcode_neu:
+    path:     /neu
+    defaults: { _controller: FoodBundle:Barcode:neu }
    

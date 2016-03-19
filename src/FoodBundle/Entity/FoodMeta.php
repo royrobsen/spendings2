@@ -224,4 +224,33 @@ class FoodMeta
     {
         return $this->foodMain;
     }
+    /**
+     * @var \FoodBundle\Entity\Artikel
+     */
+    private $artikel;
+
+
+    /**
+     * Set artikel
+     *
+     * @param \FoodBundle\Entity\Artikel $artikel
+     *
+     * @return FoodMeta
+     */
+    public function setArtikel(\FoodBundle\Entity\Artikel $artikel = null)
+    {
+        $this->artikel = $artikel;
+
+        return $this;
+    }
+
+    /**
+     * Get artikel
+     *
+     * @return \FoodBundle\Entity\Artikel
+     */
+    public function getArtikel()
+    {
+        return $this->artikel;
+    }
 }

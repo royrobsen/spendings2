@@ -110,4 +110,3 @@ class Shoppinglist
         return $this->foodMain;
     }
 }
-

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="FoodBundle\Entity\Artikel" table="artikel">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="artikelName" type="string" column="artikel_name" nullable="false"></field>
+    <field name="code" type="string" column="code" nullable="false"></field>
+    <field name="catRef" type="integer" column="cat_ref" nullable="false"></field>
+        <one-to-many
+            field="foodData"
+            target-entity="FoodMeta"
+                mapped-by="foodMain" />          
+        <many-to-one
+            field="category"
+            target-entity="Kategorien"
+            inversed-by="artikel"
+            join-column="categoryName">
+
+            <join-column name="cat_ref" referenced-column-name="id" />
+        </many-to-one>
+            <one-to-many
+            field="shoplist"
+            target-entity="Shoppinglist"
+            mapped-by="foodMain" />
+        <one-to-many
+            field="artikelMeta"
+            target-entity="FoodMeta"
+                mapped-by="artikel" /> 
+  </entity>
+</doctrine-mapping>
