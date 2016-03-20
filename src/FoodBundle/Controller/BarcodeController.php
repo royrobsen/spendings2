@@ -21,6 +21,13 @@ class BarcodeController extends Controller
     public function barcodeAction(Request $request)
     {
         $code = $request->query->get('code');
+               
+        $artikel = $this->getDoctrine()->getRepository('FoodBundle:Artikel')->findOneBy(array('code' => $code));
+        if ($artikel != NULL) {
+            return $this->redirect($this->generateUrl('barcode_neu', array('code' => $code)));
+        } else {
+            return $this->redirect($this->generateUrl('barcode_neuerartikel', array('code' => $code)));
+        }
         
         return $this->render('FoodBundle:Barcode:barcode.html.twig', array('code' => $code));
     }
@@ -58,10 +65,14 @@ class BarcodeController extends Controller
     
     public function neuAction(Request $request)
     {
+        $code = $request->query->get('code');
+        
+        $artikel = $this->getDoctrine()->getRepository('FoodBundle:Artikel')->findOneBy(array('code' => $code));
         
         $foodMeta = new FoodMeta();
         
         $form = $this->createForm(new ArtikelMetaType(), $foodMeta); 
+        $form->get('artikel')->setData($artikel);
         $form->remove('abgang');
         $form->handleRequest($request);
                 

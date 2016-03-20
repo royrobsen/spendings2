@@ -54,4 +54,3 @@ barcode_neuerartikel:
 barcode_neu:
     path:     /neu
     defaults: { _controller: FoodBundle:Barcode:neu }
-   

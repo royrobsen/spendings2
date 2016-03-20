@@ -19,10 +19,10 @@
 
             <join-column name="cat_ref" referenced-column-name="id" />
         </many-to-one>
-            <one-to-many
+        <one-to-many
             field="shoplist"
             target-entity="Shoppinglist"
-            mapped-by="foodMain" />
+            mapped-by="artikel" />
         <one-to-many
             field="artikelMeta"
             target-entity="FoodMeta"

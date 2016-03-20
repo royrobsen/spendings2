@@ -18,7 +18,44 @@ class DefaultController extends Controller
 {
     public function bestandAction()
     {
-        return $this->render('FoodBundle:Default:bestand.html.twig');
+        
+        $request = $this->getRequest();
+        
+        $artikelBestand = $this->getDoctrine()
+                ->getRepository('FoodBundle:Artikel');
+                
+        $queryBestand = $artikelBestand->createQueryBuilder('a')
+                ->select('a')
+                ->groupBy('a.id')
+                ->getQuery();
+                
+        $artikelBestand = $queryBestand->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+               
+        $data = array('data' => array());
+
+        foreach ($artikelBestand as $artikel) {
+            
+            $foodMeta2 = $this->getDoctrine()
+                    ->getRepository('FoodBundle:FoodMeta');
+
+            $queryFoodMeta = $foodMeta2->createQueryBuilder('fm')
+                    ->select('(sum(fm.amount) - sum(fm.abgang)) as menge')
+                    ->where('fm.foodRef = :id')
+                    ->setParameter(':id', $artikel['id'])
+                    ->getQuery();
+
+            $foodMeta2 = $queryFoodMeta->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+
+              
+            $artikelBestand = $queryBestand->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+
+            $foodMeta = $this->getDoctrine()->getRepository('FoodBundle:FoodMeta')->findOneBy(array('foodRef' => $artikel['id']), array('expireDate' => 'ASC'));
+            if ( $foodMeta != NULL) {
+            $data['data'][] = array('artikelName' => $artikel['artikelName'], 'purchaseDate' => $foodMeta->getPurchaseDate()->format('Y-m-d'), 'expireDate' => $foodMeta->getExpireDate()->format('Y-m-d'), 'menge' => $foodMeta2[0]['menge'], 'id' => $artikel['id']);
+            }
+        }
+
+        return $this->render('FoodBundle:Default:bestand.html.twig', array('data' => $data));
     }
     
     public function jsonbestandAction() {
@@ -140,7 +177,7 @@ class DefaultController extends Controller
 
         $shoppinglist = new Shoppinglist();
         
-        $query = $em->createQuery( "SELECT f, s FROM FoodBundle:Shoppinglist s JOIN s.foodMain f");
+        $query = $em->createQuery( "SELECT a, s FROM FoodBundle:Shoppinglist s JOIN s.artikel a");
         
         $shoppinglist = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
                 

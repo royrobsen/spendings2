@@ -11,11 +11,19 @@
     </field>
     <field name="amount" type="integer" column="amount" nullable="false">
     </field>
-            <many-to-one
+        <many-to-one
             field="foodMain"
             target-entity="Food"
             inversed-by="foodData"
             join-column="foodName">
+
+            <join-column name="food_ref" referenced-column-name="id" />
+        </many-to-one>
+        <many-to-one
+            field="artikel"
+            target-entity="Artikel"
+            inversed-by="shoppinglist"
+            join-column="artikelName">
 
             <join-column name="food_ref" referenced-column-name="id" />
         </many-to-one>

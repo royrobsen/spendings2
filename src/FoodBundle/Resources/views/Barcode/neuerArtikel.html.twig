@@ -1,24 +1,22 @@
 {% extends 'base2.html.twig' %}
 
 {% block body %}
-<div class="row">
+<div class="col-lg-12">
     <div class="col-lg-12">
-        <div class="col-lg-12">
-            {% for flash_message in app.session.flashbag.get('notice') %}
-            <div class="alert alert-info">
-                {{ flash_message }}
-            </div>
-            {% endfor %}
-            {{form_start(form)}}
-            <h2>Neuen Artikel anlegen</h2>
-            <h4>Name</h4>
-           {{ form_widget(form.artikelName, { 'attr': {'class': 'form-control'}} ) }}
-            <h4>Kategorie</h4>
-           {{ form_widget(form.category, { 'attr': {'class': 'form-control'}} ) }}<br />
-           {{ form_widget(form.save, { 'attr': {'class': 'btn btn-info'}} ) }}
-           {{ form_end(form) }}  
-    
+        {% for flash_message in app.session.flashbag.get('notice') %}
+        <div class="alert alert-info">
+            {{ flash_message }}
         </div>
+        {% endfor %}
+        {{form_start(form)}}
+        <h2>Neuen Artikel anlegen</h2>
+        <h4>Name</h4>
+       {{ form_widget(form.artikelName, { 'attr': {'class': 'form-control'}} ) }}
+        <h4>Kategorie</h4>
+       {{ form_widget(form.category, { 'attr': {'class': 'form-control'}} ) }}<br />
+       {{ form_widget(form.save, { 'attr': {'class': 'btn btn-info'}} ) }}
+       {{ form_end(form) }}  
+
     </div>
 </div>
 {% endblock %}
