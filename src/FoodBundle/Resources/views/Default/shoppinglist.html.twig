@@ -15,7 +15,7 @@
         <tbody>
            {% for item in shoppinglist %}
            <tr>
-               <td>{{item.foodMain.foodName}}</td>
+               <td>{{item.artikel.artikelName}}</td>
                <td>{{item.amount}}</td>
                <td><a href="/shoppinglist/delete/{{item.id}}">Erledigt</a></td>
            </tr>
