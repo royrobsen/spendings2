@@ -11,9 +11,9 @@ class ShoppinglistType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         
-        $builder->add('foodMain', 'entity', array(
-                    'class' => 'FoodBundle:Food',
-                    'choice_label' => 'foodName',
+        $builder->add('artikel', 'entity', array(
+                    'class' => 'FoodBundle:Artikel',
+                    'choice_label' => 'artikelName',
                 ))
                 ->add('amount', 'integer', 
                     array('label' => false))  
