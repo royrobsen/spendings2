@@ -71,8 +71,7 @@ class DefaultController extends Controller
                 ->getQuery();
                 
         $foodBestand = $queryFoodBestand->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
-               
-        $data = array('data' => array());
+              
 
         foreach ($foodBestand as $food) {
             
@@ -92,7 +91,7 @@ class DefaultController extends Controller
 
             $foodMeta = $this->getDoctrine()->getRepository('FoodBundle:FoodMeta')->findOneBy(array('foodRef' => $food['id']), array('expireDate' => 'ASC'));
             if ( $foodMeta != NULL) {
-            $data['data'][] = array($food['foodName'], $foodMeta->getPurchaseDate()->format('Y-m-d'), $foodMeta->getExpireDate()->format('Y-m-d'),$foodMeta2[0]['menge'], $food['id']);
+            $data[] = array($food['foodName'], $foodMeta->getPurchaseDate()->format('Y-m-d'), $foodMeta->getExpireDate()->format('Y-m-d'),$foodMeta2[0]['menge'], $food['id']);
             }
         }
 
