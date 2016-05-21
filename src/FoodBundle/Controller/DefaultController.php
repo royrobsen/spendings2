@@ -60,40 +60,7 @@ class DefaultController extends Controller
     
     public function jsonbestandAction() {
 
-        $request = $this->getRequest();
-                
-        $foodBestand = $this->getDoctrine()
-                ->getRepository('FoodBundle:Food');
-                
-        $queryFoodBestand = $foodBestand->createQueryBuilder('f')
-                ->select('f')
-                ->groupBy('f.id')
-                ->getQuery();
-                
-        $foodBestand = $queryFoodBestand->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
-              
-
-        foreach ($foodBestand as $food) {
-            
-            $foodMeta2 = $this->getDoctrine()
-                    ->getRepository('FoodBundle:FoodMeta');
-
-            $queryFoodMeta = $foodMeta2->createQueryBuilder('fm')
-                    ->select('(sum(fm.amount) - sum(fm.abgang)) as menge')
-                    ->where('fm.foodRef = :id')
-                    ->setParameter(':id', $food['id'])
-                    ->getQuery();
-
-            $foodMeta2 = $queryFoodMeta->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
-
-              
-            $foodBestand = $queryFoodBestand->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
-
-            $foodMeta = $this->getDoctrine()->getRepository('FoodBundle:FoodMeta')->findOneBy(array('foodRef' => $food['id']), array('expireDate' => 'ASC'));
-            if ( $foodMeta != NULL) {
-            $data[] = array($food['foodName'], $foodMeta->getPurchaseDate()->format('Y-m-d'), $foodMeta->getExpireDate()->format('Y-m-d'),$foodMeta2[0]['menge'], $food['id']);
-            }
-        }
+        $data = array('bestand' => 'test1');
 
         $response = new Response();
         $response->setContent(json_encode($data));
